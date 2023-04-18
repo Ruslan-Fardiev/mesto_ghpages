@@ -9,4 +9,14 @@
     width: 22px;
     height: 19px;
     transform: translate(0px, 5px);
+    cursor: pointer;
+}
+
+.card__like-button:hover {
+    opacity: 0.5;
+}
+
+.card__like-button:active {
+    background-image: url(../../../images/like\ Button-active.svg);
+    opacity: 1;
 }

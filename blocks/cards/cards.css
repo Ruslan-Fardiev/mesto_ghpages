@@ -14,5 +14,6 @@
     .cards {
         width: 69%;
         padding-top: 51px;
+        grid-template-columns: repeat(3, minmax(282px, 1fr));
     }
 }
