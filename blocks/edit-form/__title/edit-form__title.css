@@ -1,4 +1,5 @@
 .edit-form__title {
+    width: 83%;
     margin: 0 auto;
     padding: 25px 0 75px;
     font-family: 'Inter', sans-serif;
@@ -11,7 +12,7 @@
 
 @media screen and (min-width: 1024px) {
     .edit-form__title {
-        padding: 34px 0 54px;
+        padding: 34px 0 47px;
         font-size: 24px;
         line-height: 29px;
         width: 83%;
