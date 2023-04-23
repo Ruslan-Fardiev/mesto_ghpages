@@ -2,10 +2,12 @@
     padding-top: 26px;
     display:flex;
     flex-direction: column;
+    max-width: 280px;
 }
 
 @media screen and (min-width: 1024px) {
     .profile__info {
         padding-left: 30px;
+        max-width: 580px;
     }
 }

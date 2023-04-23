@@ -1,12 +1,12 @@
 .popup__save-button {
-    margin: 0 auto;
+    margin: 15px auto 5px;
     padding: 0;
     border: none;
     width: 238px;
     height: 46px;
     background: #000000;
     border-radius: 2px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;

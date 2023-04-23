@@ -3,7 +3,8 @@
     padding: 0;
     border: none;
     border-radius: 0;
-    background-image: url(../../../images/Edit\ Button.svg);
+    background-image: url(../../../images/Edit-Button.svg);
+    background-repeat: no-repeat;
     background-size: contain;
     width: 18px;
     height: 18px;

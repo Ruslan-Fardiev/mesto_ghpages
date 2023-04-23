@@ -1,16 +1,13 @@
-.popup__name-input {
+.popup__input {
     width: 83%;
     margin: 0 auto 30px;
     padding: 0 0 10px;
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #000000;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
 }
