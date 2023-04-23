@@ -7,8 +7,7 @@
     background-size: contain;
     width: 18px;
     height: 18px;
-    transform: translate(113px, -25px);
-    margin: 0 auto;
+    margin: 0;
     cursor: pointer;
 }
 
@@ -20,6 +19,5 @@
     .profile__edit-button {
         width: 24px;
         height: 24px;
-        transform: translate(177px, -33px);
     }
 }

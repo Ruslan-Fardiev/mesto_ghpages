@@ -1,6 +1,6 @@
 .profile__paragrath {
     margin: 0;
-    padding-bottom: 22px;
+    padding: 7px 0 33px;
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -8,7 +8,6 @@
     line-height: 17px;
     text-align: center;
     color: #FFFFFF;
-    transform: translate(0px, -13px);
 }
 
 @media screen and (min-width: 1024px) {
@@ -16,7 +15,6 @@
         text-align: left;
         font-size: 18px;
         line-height: 22px;
-        padding: 0;
-        transform: translate(0px, -18px);
+        padding: 5px 0 0;
     }
 }

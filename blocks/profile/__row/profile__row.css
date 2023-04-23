@@ -1,0 +1,14 @@
+.profile__row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    transform: translate(15px, 0px);
+}
+
+@media screen and (min-width: 1024px) {
+    .profile__row {
+        column-gap: 18px;
+        transform: translate(0px, 0px);
+    }
+}
