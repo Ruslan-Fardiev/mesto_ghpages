@@ -74,6 +74,13 @@ const createCards = function addCard(item) {
     card.querySelector('.card__image').src = item.link;
     card.querySelector('.card__title').textContent = item.name;
     card.querySelector('.card__image').alt = item.name;
+
+    //Лайк карточек
+    card.querySelector('.card__like-button')
+        .addEventListener('click', function (evt) {
+            evt.target.classList.toggle('card__like-button_active');
+        });
+
     cards.append(card);
 }
 
@@ -81,5 +88,3 @@ const createCards = function addCard(item) {
 const cardList = initialCards.map(addCard => {
     const cardElement = createCards(addCard);
 })
-
-
