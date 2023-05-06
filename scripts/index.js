@@ -74,17 +74,25 @@ const createCards = function addCard(item) {
     card.querySelector('.card__image').src = item.link;
     card.querySelector('.card__title').textContent = item.name;
     card.querySelector('.card__image').alt = item.name;
+    cards.append(card);
 
     //Лайк карточек
     card.querySelector('.card__like-button')
         .addEventListener('click', function (evt) {
+            evt.preventDefault();
             evt.target.classList.toggle('card__like-button_active');
         });
-
-    cards.append(card);
+    //Удаление карточки
+    card.querySelector('.card__delete-button')
+        .addEventListener('click', function () {
+            card.remove();
+        });
 }
 
 //функция добавление элементов массива в карточки
 const cardList = initialCards.map(addCard => {
     const cardElement = createCards(addCard);
 })
+
+
+
