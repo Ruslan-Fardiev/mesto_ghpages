@@ -46,7 +46,10 @@ const inputPlaceLink = popupAddCardElement.querySelector('#input-place-link');
 const inputPlaceName = popupAddCardElement.querySelector('#input-place-name');
 
 //включение поп-ап блока добавления карточек
-const addPopupAddCard = function () {
+const addPopupAddCard = function (evt) {
+    evt.preventDefault();
+    inputPlaceLink.value = ('');
+    inputPlaceName.value = ('');
     popupAddCardElement.classList.add('popup_opened');
 }
 
@@ -88,34 +91,46 @@ const initialCards = [
 ];
 
 //выборка карточек
-const cards = document.querySelector('.cards');
+const containerCards = document.querySelector('.cards');
 const template = document.querySelector('#add-card-template');
 const card = template.content.querySelector('.card');
 
 //функция создания карточек
-const createCards = function createCard(item) {
+const createCard = (item) => {
     const card = template.content.querySelector('.card').cloneNode(true);
     card.querySelector('.card__image').src = item.link;
     card.querySelector('.card__title').textContent = item.name;
     card.querySelector('.card__image').alt = item.name;
-    cards.append(card);
+
+    card.querySelector('.card__like-button').addEventListener('click', likeCard);
+    card.querySelector('.card__delete-button').addEventListener('click', deleteCard);
+
+    return card;
+}
+
+const renderCard = (container, data) => {
+    const card = createCard(data);
+    container.prepend(card);
 }
 
 //функция добавление элементов массива в карточки
-const cardList = initialCards.map(createCard => {
-    createCards(createCard);
+const cardList = initialCards.map(card => {
+    renderCard(containerCards, card)
 })
 
 //функция добавления новой карточки
-const createNewCard = function addNewCard() {
-    card.querySelector('.card__image').src = inputPlaceLink.value;
-    card.querySelector('.card__image').alt = inputPlaceName.value;
-    card.querySelector('.card__title').textContent = inputPlaceName.value;
-    cards.prepend(card);
+const createNewCard = (evt) => {
+    evt.preventDefault();
+    const data = {
+        name: inputPlaceName.value,
+        link: inputPlaceLink.value
+    }
+
+    renderCard(containerCards, data)
     removePopupAddCard();
 }
 
-popupAddCardElement.addEventListener('submit', createNewCard);
+popupAddCardElement.addEventListener('submit', (evt) => createNewCard(evt));
 
 //Лайк карточек
 function likeCard (evt) {
@@ -123,11 +138,7 @@ function likeCard (evt) {
     evt.target.classList.toggle('card__like-button_active');
 }
 
-card.querySelector('.card__like-button').addEventListener('click', likeCard);
-
 //Удаление карточки
-function deleteCard () {
-    card.remove();
+function deleteCard (evt) {
+    evt.target.closest('.card').remove();
 }
-
-card.querySelector('.card__delete-button').addEventListener('click', deleteCard);
