@@ -1,4 +1,7 @@
 .popup-image__close-button {
+    position: absolute;
+    right: 0;
+    top: -36px;
     background: none;
     padding: 0;
     border: none;
@@ -18,5 +21,7 @@
     .popup-image__close-button {
         width: 32px;
         height: 32px;
+        right: -40px;
+        top: -40px;
     }
 }

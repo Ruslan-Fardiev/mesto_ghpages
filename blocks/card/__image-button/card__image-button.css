@@ -1,0 +1,7 @@
+.card__image-button {
+    background: none;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}

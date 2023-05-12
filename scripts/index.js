@@ -93,7 +93,9 @@ const initialCards = [
 //выборка карточек
 const containerCards = document.querySelector('.cards');
 const template = document.querySelector('#add-card-template');
-const card = template.content.querySelector('.card');
+const popupImageElement = document.querySelector('.popup-image');
+const popupFullImage = popupImageElement.querySelector('.popup-image__image');
+const popupImageTitle = popupImageElement.querySelector('.popup-image__title');
 
 //функция создания карточек
 const createCard = (item) => {
@@ -101,9 +103,14 @@ const createCard = (item) => {
     card.querySelector('.card__image').src = item.link;
     card.querySelector('.card__title').textContent = item.name;
     card.querySelector('.card__image').alt = item.name;
+    popupImageElement.querySelector('.popup-image__image').src = item.link;
+    popupImageElement.querySelector('.popup-image__title').textContent = item.name;
+    popupImageElement.querySelector('.popup-image__image').alt = item.name
+
 
     card.querySelector('.card__like-button').addEventListener('click', likeCard);
     card.querySelector('.card__delete-button').addEventListener('click', deleteCard);
+    card.querySelector('.card__image-button').addEventListener('click', openImage);
 
     return card;
 }
@@ -112,6 +119,7 @@ const renderCard = (container, data) => {
     const card = createCard(data);
     container.prepend(card);
 }
+
 
 //функция добавление элементов массива в карточки
 const cardList = initialCards.map(card => {
@@ -133,12 +141,22 @@ const createNewCard = (evt) => {
 popupAddCardElement.addEventListener('submit', (evt) => createNewCard(evt));
 
 //Лайк карточек
-function likeCard (evt) {
+function likeCard(evt) {
     evt.preventDefault();
     evt.target.classList.toggle('card__like-button_active');
 }
 
 //Удаление карточки
-function deleteCard (evt) {
+function deleteCard(evt) {
     evt.target.closest('.card').remove();
 }
+
+//Открыть попап с картинкой
+function openImage() {
+    popupImageElement.classList.add('popup-image_opened');
+}
+
+//Закрыть попап с картинкой
+popupImageElement.querySelector('.popup-image__close-button').addEventListener('click', function() {
+    popupImageElement.classList.remove('popup-image_opened');
+});
