@@ -43,8 +43,8 @@
         <div class="popup__container">
             <form id="popup-edit-form" class="popup__form" action="#" name="Profile-edit" method="get">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__input" id="input-name" type="text" name="Username" placeholder="Имя">
-                <input class="popup__input" id="input-job" type="text" name="About-user" placeholder="О себе">
+                <input class="popup__input" id="input-name" type="text" name="Username" placeholder="Имя" required>
+                <input class="popup__input" id="input-job" type="text" name="About-user" placeholder="О себе" required>
                 <button class="popup__save-button" type="submit" aria-label="Сохранить">Сохранить</button>
                 <button id="edit-profile-close" class="popup__close-button" type="reset" aria-label="Закрыть"></button>
             </form>
@@ -54,9 +54,9 @@
         <div class="popup__container">
             <form id="popup-add-card-form" class="popup__form" action="#" name="Add-card" method="get">
                 <h2 class="popup__title">Новое место</h2>
-                <input class="popup__input" id="input-place-name" type="text" name="Place-name" placeholder="Название">
-                <input class="popup__input" id="input-place-link" type="text" name="Place-link"
-                    placeholder="Ссылка на картинку">
+                <input class="popup__input" id="input-place-name" type="text" name="Place-name" placeholder="Название" required>
+                <input class="popup__input" id="input-place-link" type="url" name="Place-link"
+                    placeholder="Ссылка на картинку" required>
                 <button class="popup__save-button" type="submit" aria-label="Сохранить">Создать</button>
                 <button id="add-card-close" class="popup__close-button" type="reset" aria-label="Закрыть"></button>
             </form>
@@ -86,6 +86,7 @@
         </li>
     </template>
     <template></template>
+    <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 
