@@ -16,7 +16,7 @@ const inputPlaceName = popupAddCardElement.querySelector('#input-place-name');
 const containerCards = document.querySelector('.cards');
 const templateCards = document.querySelector('#add-card-template');
 const popupImageElement = document.querySelector('#popup-image');
-const popupImageCloseButton = popupImageElement.querySelector('.popup-image__close-button')
+const popupImageCloseButton = popupImageElement.querySelector('#image-close-button')
 
 // добавить значения элементов данных пользователя в поля ввода блока редактирования данных пользователя
 const addProfileData = () => {
@@ -94,10 +94,10 @@ function deleteCard(evt) {
 
 // создание попап с картинкой
 function createImagePopup(card) {
-    const popupImage = popupImageElement.querySelector('.popup-image__image');
+    const popupImage = popupImageElement.querySelector('.popup__image');
     popupImage.src = card.link;
     popupImage.alt = card.name;
-    popupImageElement.querySelector('.popup-image__title').textContent = card.name;
+    popupImageElement.querySelector('.popup__image-title').textContent = card.name;
     return popupImageElement
 }
 

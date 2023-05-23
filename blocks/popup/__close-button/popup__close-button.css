@@ -1,4 +1,7 @@
 .popup__close-button {
+    position: absolute;
+    right: 0;
+    top: -36px;
     background: none;
     padding: 0;
     border: none;
@@ -8,7 +11,6 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-    transform: translate(262px, -338px);
 }
 
 .popup__close-button:hover {
@@ -19,6 +21,7 @@
     .popup__close-button {
         width: 32px;
         height: 32px;
-        transform: translate(438px, -338px);
+        right: -40px;
+        top: -40px;
     }
 }
