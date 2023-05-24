@@ -16,18 +16,19 @@ const inputPlaceName = popupAddCardElement.querySelector('#input-place-name');
 const containerCards = document.querySelector('.cards');
 const templateCards = document.querySelector('#add-card-template');
 const popupImageElement = document.querySelector('#popup-image');
+const popupImage = popupImageElement.querySelector('.popup__image');
+const popupImageTitle = popupImageElement.querySelector('.popup__image-title')
 const popupImageCloseButton = popupImageElement.querySelector('#image-close-button')
 
 // добавить значения элементов данных пользователя в поля ввода блока редактирования данных пользователя
-const addProfileData = () => {
+const openPropfilePopup = () => {
     nameInput.value = profileUsername.textContent;
     jobInput.value = profileAboutMe.textContent;
-    return editProfileFormElement
+    popupEditProfileElement.classList.add('popup_opened');
 }
 
-// включение поп-ап блоков
-const openPopup = function (popup, profile) {
-    const profileData = addProfileData(profile);
+// открытие поп-ап блоков
+const openPopup = function (popup) {
     popup.classList.add('popup_opened');
 }
 
@@ -41,7 +42,7 @@ const editProfileFormSubmit = function (evt) {
     evt.preventDefault();
     profileUsername.textContent = nameInput.value;
     profileAboutMe.textContent = jobInput.value;
-    closePopup();
+    closePopup(popupEditProfileElement);
 }
 
 // создание карточек
@@ -77,7 +78,7 @@ const handleNewCard = (evt) => {
     }
 
     renderCard(containerCards, data)
-    removePopupAddCard();
+    closePopup(popupAddCardElement);
     evt.target.reset();
 }
 
@@ -93,22 +94,20 @@ function deleteCard(evt) {
 }
 
 // создание попап с картинкой
-function createImagePopup(card) {
-    const popupImage = popupImageElement.querySelector('.popup__image');
+function openImagePopup(card) {
     popupImage.src = card.link;
     popupImage.alt = card.name;
-    popupImageElement.querySelector('.popup__image-title').textContent = card.name;
-    return popupImageElement
+    popupImageTitle.textContent = card.name;
 }
 
 // открытие попап с картинкой
 function openImage(data) {
-    const card = createImagePopup(data);
+    const card = openImagePopup(data);
     popupImageElement.classList.add('popup_opened');
 }
 
 // обратчики событий
-editProfileOpenButtonElement.addEventListener('click', () => openPopup(popupEditProfileElement));
+editProfileOpenButtonElement.addEventListener('click', openPropfilePopup);
 closeButtonElement.addEventListener('click', () => closePopup(popupEditProfileElement));
 editProfileFormElement.addEventListener('submit', editProfileFormSubmit);
 popupAddCardOpen.addEventListener('click', () => openPopup(popupAddCardElement));
