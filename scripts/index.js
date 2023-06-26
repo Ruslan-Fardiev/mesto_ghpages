@@ -37,6 +37,26 @@ const closePopup = function (popup) {
     popup.classList.remove('popup_opened');
 }
 
+// закрытие поп-ап кнопкой ESC
+function keyHandler(evt) {
+    if (evt.key === 'Escape') { closePopup(popupEditProfileElement) };
+    if (evt.key === 'Escape') { closePopup(popupAddCardElement) };
+    if (evt.key === 'Escape') { closePopup(popupImageElement) };
+}
+
+// закрытие поп-ап блоков нажатием на overlay
+function closePopupWithOverlay() {
+    const popupOverlayElement = document.querySelectorAll('.popup__overlay');
+
+    [...popupOverlayElement].forEach((overlayItem) => {
+        overlayItem.addEventListener('click', () => closePopup(popupEditProfileElement));
+        overlayItem.addEventListener('click', () => closePopup(popupAddCardElement));
+        overlayItem.addEventListener('click', () => closePopup(popupImageElement));
+    })
+}
+
+closePopupWithOverlay()
+
 // редактирование данных пользователя
 const editProfileFormSubmit = function (evt) {
     evt.preventDefault();
@@ -107,6 +127,7 @@ function openImage(data) {
 }
 
 // обратчики событий
+addEventListener('keydown', keyHandler);
 editProfileOpenButtonElement.addEventListener('click', openPropfilePopup);
 closeButtonElement.addEventListener('click', () => closePopup(popupEditProfileElement));
 editProfileFormElement.addEventListener('submit', editProfileFormSubmit);
@@ -117,4 +138,4 @@ popupAddCardElement.addEventListener('submit',
         handleNewCard(evt);
     }
 );
-popupImageCloseButton.addEventListener('click', () => closePopup(popupImageElement))
+popupImageCloseButton.addEventListener('click', () => closePopup(popupImageElement));
