@@ -22,9 +22,11 @@ const popupImageCloseButton = popupImageElement.querySelector('#image-close-butt
 
 // добавить значения элементов данных пользователя в поля ввода блока редактирования данных пользователя
 const openPropfilePopup = () => {
+    let event = new Event('input');
     nameInput.value = profileUsername.textContent;
     jobInput.value = profileAboutMe.textContent;
     popupEditProfileElement.classList.add('popup_opened');
+    nameInput.dispatchEvent(event);
 }
 
 // открытие поп-ап блоков
