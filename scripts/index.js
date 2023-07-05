@@ -1,18 +1,17 @@
 // выборка
-const editProfileOpenButtonElement = document.querySelector('#profile-edit-button');
+const buttonOpenPopupProfile = document.querySelector('#profile-edit-button');
 const popupEditProfileElement = document.querySelector('#popup-edit-profile');
-const closeButtonElement = popupEditProfileElement.querySelector('.popup__close-button');
-const editProfileFormElement = popupEditProfileElement.querySelector('#popup-edit-form');
-const nameInput = editProfileFormElement.querySelector('#input-name');
-const jobInput = editProfileFormElement.querySelector('#input-job');
+const buttonClosePopup = popupEditProfileElement.querySelector('.popup__close-button');
+const formProfileElement = popupEditProfileElement.querySelector('#popup-edit-form');
+const nameInput = formProfileElement.querySelector('#input-name');
+const jobInput = formProfileElement.querySelector('#input-job');
 const profileUsername = document.querySelector('.profile__username');
 const profileAboutMe = document.querySelector('.profile__paragrath');
 const popupAddCardOpen = document.querySelector('#add-card-button');
 const popupAddCardElement = document.querySelector('#popup-add-card');
 const popupAddCardClose = popupAddCardElement.querySelector('#add-card-close');
-const addCardFormElement = popupAddCardElement.querySelector('#popup-add-card-form');
-const inputPlaceLink = popupAddCardElement.querySelector('#input-place-link');
-const inputPlaceName = popupAddCardElement.querySelector('#input-place-name');
+const placeInputLink = popupAddCardElement.querySelector('#input-place-link');
+const placeInputName = popupAddCardElement.querySelector('#input-place-name');
 const containerCards = document.querySelector('.cards');
 const templateCards = document.querySelector('#add-card-template');
 const popupImageElement = document.querySelector('#popup-image');
@@ -22,28 +21,31 @@ const popupImageCloseButton = popupImageElement.querySelector('#image-close-butt
 
 // добавить значения элементов данных пользователя в поля ввода блока редактирования данных пользователя
 const openPropfilePopup = () => {
-    let event = new Event('input');
+    const event = new Event('input');
     nameInput.value = profileUsername.textContent;
     jobInput.value = profileAboutMe.textContent;
-    popupEditProfileElement.classList.add('popup_opened');
+    openPopup(popupEditProfileElement);
     nameInput.dispatchEvent(event);
 }
 
 // открытие поп-ап блоков
 const openPopup = function (popup) {
     popup.classList.add('popup_opened');
+    addEventListener('keydown', keyHandler);
 }
 
 // закрытие поп-ап блоков
 const closePopup = function (popup) {
     popup.classList.remove('popup_opened');
+    removeEventListener('keydown', keyHandler);
 }
 
 // закрытие поп-ап кнопкой ESC
 function keyHandler(evt) {
-    if (evt.key === 'Escape') { closePopup(popupEditProfileElement) };
-    if (evt.key === 'Escape') { closePopup(popupAddCardElement) };
-    if (evt.key === 'Escape') { closePopup(popupImageElement) };
+    const popupOpened = document.querySelectorAll('.popup_opened');
+    [...popupOpened].forEach((popup) => {
+        if (evt.key === 'Escape') {closePopup(popup)};
+    }); 
 }
 
 // закрытие поп-ап блоков нажатием на overlay
@@ -95,8 +97,8 @@ initialCards.forEach(card => {
 const handleNewCard = (evt) => {
     evt.preventDefault();
     const data = {
-        name: inputPlaceName.value,
-        link: inputPlaceLink.value
+        name: placeInputName.value,
+        link: placeInputLink.value
     }
 
     renderCard(containerCards, data)
@@ -125,14 +127,13 @@ function openImagePopup(card) {
 // открытие попап с картинкой
 function openImage(data) {
     const card = openImagePopup(data);
-    popupImageElement.classList.add('popup_opened');
+    openPopup(popupImageElement);
 }
 
 // обратчики событий
-addEventListener('keydown', keyHandler);
-editProfileOpenButtonElement.addEventListener('click', openPropfilePopup);
-closeButtonElement.addEventListener('click', () => closePopup(popupEditProfileElement));
-editProfileFormElement.addEventListener('submit', editProfileFormSubmit);
+buttonOpenPopupProfile.addEventListener('click', openPropfilePopup);
+buttonClosePopup.addEventListener('click', () => closePopup(popupEditProfileElement));
+formProfileElement.addEventListener('submit', editProfileFormSubmit);
 popupAddCardOpen.addEventListener('click', () => openPopup(popupAddCardElement));
 popupAddCardClose.addEventListener('click', () => closePopup(popupAddCardElement));
 popupAddCardElement.addEventListener('submit',

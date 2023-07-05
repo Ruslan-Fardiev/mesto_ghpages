@@ -28,7 +28,7 @@ function disabledButton(buttonElement, config) {
 
 // Функция разблокировки кнопки
 function enableButton(buttonElement, config) {
-    buttonElement.disabled = 'enable';
+    buttonElement.disabled = false;
     buttonElement.classList.remove(config.inActiveButtonClass);
 }
 
