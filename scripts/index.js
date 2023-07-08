@@ -16,8 +16,8 @@ const containerCards = document.querySelector('.cards');
 const templateCards = document.querySelector('#add-card-template');
 const popupImageElement = document.querySelector('#popup-image');
 const popupImage = popupImageElement.querySelector('.popup__image');
-const popupImageTitle = popupImageElement.querySelector('.popup__image-title')
-const popupImageCloseButton = popupImageElement.querySelector('#image-close-button')
+const popupImageTitle = popupImageElement.querySelector('.popup__image-title');
+const popupImageCloseButton = popupImageElement.querySelector('#image-close-button');
 
 // добавить значения элементов данных пользователя в поля ввода блока редактирования данных пользователя
 const openPropfilePopup = () => {
@@ -42,11 +42,12 @@ const closePopup = function (popup) {
 
 // закрытие поп-ап кнопкой ESC
 function keyHandler(evt) {
-    const popupOpened = document.querySelectorAll('.popup_opened');
-    [...popupOpened].forEach((popup) => {
-        if (evt.key === 'Escape') {closePopup(popup)};
-    }); 
-}
+    if (evt.key === 'Escape') {
+        const popupOpened = document.querySelector('.popup_opened');
+        closePopup(popupOpened);
+    };
+};
+
 
 // закрытие поп-ап блоков нажатием на overlay
 function closePopupWithOverlay() {

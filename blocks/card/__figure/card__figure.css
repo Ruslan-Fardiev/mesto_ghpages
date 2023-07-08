@@ -1,5 +1,6 @@
 .card__figure {
     margin: 0;
+    width: 282px;
     display: flex;
     flex-direction: column;
 }
