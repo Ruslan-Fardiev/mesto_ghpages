@@ -1,4 +1,10 @@
+import { initialCards } from './cards.js';
 import { Card } from './Card.js';
+import { config } from './constants.js';
+import { FormValidator } from './FormValidator.js';
+
+const formValidator = new FormValidator(config)
+formValidator.enableValidation(config)
 
 // выборка
 const buttonOpenPopupProfile = document.querySelector('#profile-edit-button');
@@ -15,7 +21,6 @@ const popupAddCardClose = popupAddCardElement.querySelector('#add-card-close');
 const placeInputLink = popupAddCardElement.querySelector('#input-place-link');
 const placeInputName = popupAddCardElement.querySelector('#input-place-name');
 const containerCards = document.querySelector('.cards');
-
 const popupImageElement = document.querySelector('#popup-image');
 const popupImage = popupImageElement.querySelector('.popup__image');
 const popupImageTitle = popupImageElement.querySelector('.popup__image-title');
