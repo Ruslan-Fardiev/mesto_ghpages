@@ -1,3 +1,5 @@
+import { Card } from './Card.js';
+
 // выборка
 const buttonOpenPopupProfile = document.querySelector('#profile-edit-button');
 const popupEditProfileElement = document.querySelector('#popup-edit-profile');
@@ -13,7 +15,7 @@ const popupAddCardClose = popupAddCardElement.querySelector('#add-card-close');
 const placeInputLink = popupAddCardElement.querySelector('#input-place-link');
 const placeInputName = popupAddCardElement.querySelector('#input-place-name');
 const containerCards = document.querySelector('.cards');
-const templateCards = document.querySelector('#add-card-template');
+
 const popupImageElement = document.querySelector('#popup-image');
 const popupImage = popupImageElement.querySelector('.popup__image');
 const popupImageTitle = popupImageElement.querySelector('.popup__image-title');
@@ -70,28 +72,16 @@ const editProfileFormSubmit = function (evt) {
     closePopup(popupEditProfileElement);
 }
 
-// создание карточек
-const createCard = (item) => {
-    const card = templateCards.content.querySelector('.card').cloneNode(true);
-    const cardImage = card.querySelector('.card__image').src = item.link;
-    card.querySelector('.card__title').textContent = item.name;
-    cardImage.alt = item.name;
-
-    card.querySelector('.card__like-button').addEventListener('click', handleLikeClick);
-    card.querySelector('.card__delete-button').addEventListener('click', deleteCard);
-    card.querySelector('.card__image-button').addEventListener('click', () => openImage(item))
-
-    return card;
-}
-
-const renderCard = (container, data) => {
-    const card = createCard(data);
+// рендеринг карточек
+const renderCard = (data, container) => {
+    const cardsElement = new Card({ data, openImage }, '#add-card-template').createCard();
+    const card = cardsElement;
     container.prepend(card);
 }
 
 // добавление элементов массива в карточки
 initialCards.forEach(card => {
-    renderCard(containerCards, card)
+    renderCard(card, containerCards)
 })
 
 // добавление новой карточки
@@ -102,27 +92,16 @@ const handleNewCard = (evt) => {
         link: placeInputLink.value
     }
 
-    renderCard(containerCards, data)
+    renderCard(data, containerCards)
     closePopup(popupAddCardElement);
     evt.target.reset();
 }
 
-// лайк карточек
-function handleLikeClick(evt) {
-    evt.preventDefault();
-    evt.target.classList.toggle('card__like-button_active');
-}
-
-// удаление карточки
-function deleteCard(evt) {
-    evt.target.closest('.card').remove();
-}
-
 // создание попап с картинкой
-function openImagePopup(card) {
-    popupImage.src = card.link;
-    popupImage.alt = card.name;
-    popupImageTitle.textContent = card.name;
+function openImagePopup(data) {
+    popupImage.src = data.link;
+    popupImage.alt = data.name;
+    popupImageTitle.textContent = data.name;
 }
 
 // открытие попап с картинкой
