@@ -1,63 +1,76 @@
 export class FormValidator {
     #config;
+    #formSelector;
+    #formElement;
+    #inputSelector;
+    #buttonSelector;
+    #inActiveButtonClass;
+    #inputErrorClass;
 
-    constructor(config) {
+    constructor(config, formElement) {
         this.#config = config;
+        this.#formSelector = config.formSelector;
+        this.#inputSelector = config.inputSelector;
+        this.#buttonSelector = config.buttonSelector;
+        this.#inActiveButtonClass = config.inActiveButtonClass;
+        this.#inputErrorClass = config.inputErrorClass;
+        this.#formElement = formElement;
     }
 
-    // // Функция появления ошибки на инпутах
-    #showError(inputElement, errorElement, config) {
-        inputElement.classList.add(config.inputErrorClass);
+    // Функция появления ошибки на инпутах
+    #showError(inputElement, errorElement) {
+        inputElement.classList.add(this.#inputErrorClass);
         errorElement.textContent = inputElement.validationMessage;
     }
 
-    // // Функция удаления ошибки на инпутах
-    #hideError(inputElement, errorElement, config) {
-        inputElement.classList.remove(config.inputErrorClass);
+    // Функция удаления ошибки на инпутах
+    #hideError(inputElement, errorElement) {
+        inputElement.classList.remove(this.#inputErrorClass);
         errorElement.textContent = inputElement.validationMessage;
     }
 
-    // // Функция блокировки кнопки
-    #disabledButton(buttonElement, config) {
-        buttonElement.disabled = 'disabled';
-        buttonElement.classList.add(config.inActiveButtonClass);
+    // Функция блокировки кнопки
+    disabledButton() {
+        this.buttonElement.disabled = 'disabled';
+        this.buttonElement.classList.add(this.#inActiveButtonClass);
     }
 
-    // // Функция разблокировки кнопки
-    #enableButton(buttonElement, config) {
-        buttonElement.disabled = false;
-        buttonElement.classList.remove(config.inActiveButtonClass);
+    // Функция разблокировки кнопки
+    enableButton() {
+    this.buttonElement.disabled = false;
+    this.buttonElement.classList.remove(this.#inActiveButtonClass);
     }
 
-    // // Функция изменения состояния кнопки
-    #toggleButton(buttonElement, isActive, config) {
+    // Функция изменения состояния кнопки
+    #toggleButton(isActive) {
+
         if (!isActive) {
-            this.#disabledButton(buttonElement, config);
+            this.disabledButton(this.buttonElement);
         } else {
-            this.#enableButton(buttonElement, config);
+            this.enableButton(this.buttonElement);
         }
     }
 
     // Функция изменения состояния ошибки на инпутах
-    #checkInputValidity(inputElement, formElement, config) {
+    #checkInputValidity(inputElement, formElement) {
         const isInputValid = inputElement.validity.valid;
         const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
         if (!errorElement) return;
 
         if (!isInputValid) {
-            this.#showError(inputElement, errorElement, config);
+            this.#showError(inputElement, errorElement);
         } else {
-            this.#hideError(inputElement, errorElement, config);
+            this.#hideError(inputElement, errorElement);
         }
 
     }
 
     // Установка слушателей на сабмит и инпут
-    #setEventListener(formElement, config) {
-        const inputsList = formElement.querySelectorAll(config.inputSelector);
-        const buttonElement = formElement.querySelector(config.buttonSelector);
+    #setEventListener(formElement) {
+        const inputsList = formElement.querySelectorAll(this.#inputSelector);
+        this.buttonElement = formElement.querySelector(this.#buttonSelector);
 
-        this.#toggleButton(buttonElement, formElement.checkValidity(), config);
+        this.#toggleButton(this.buttonElement, formElement.checkValidity());
 
         formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
@@ -65,17 +78,17 @@ export class FormValidator {
 
         [...inputsList].forEach((inputItem) => {
             inputItem.addEventListener('input', () => {
-                this.#toggleButton(buttonElement, formElement.checkValidity(), config);
-                this.#checkInputValidity(inputItem, formElement, config)
+                this.#toggleButton(this.buttonElement, formElement.checkValidity());
+                this.#checkInputValidity(inputItem, formElement)
             });
         })
     }
 
     // Находим формы и перебираем их
-    enableValidation(config) {
-        const forms = document.querySelectorAll(config.formSelector);
+    enableValidation() {
+        const forms = document.querySelectorAll(this.#formSelector);
         [...forms].forEach((formItem) => {
-            this.#setEventListener(formItem, config)
+            this.#setEventListener(formItem)
         });
     }
 

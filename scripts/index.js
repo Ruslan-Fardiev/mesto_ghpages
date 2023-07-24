@@ -3,9 +3,6 @@ import { Card } from './Card.js';
 import { config } from './constants.js';
 import { FormValidator } from './FormValidator.js';
 
-const formValidator = new FormValidator(config)
-formValidator.enableValidation(config)
-
 // выборка
 const buttonOpenPopupProfile = document.querySelector('#profile-edit-button');
 const popupEditProfileElement = document.querySelector('#popup-edit-profile');
@@ -25,6 +22,12 @@ const popupImageElement = document.querySelector('#popup-image');
 const popupImage = popupImageElement.querySelector('.popup__image');
 const popupImageTitle = popupImageElement.querySelector('.popup__image-title');
 const popupImageCloseButton = popupImageElement.querySelector('#image-close-button');
+
+const profileFormValidator = new FormValidator(config, formProfileElement);
+profileFormValidator.enableValidation();
+
+const addCardFormValidator = new FormValidator(config, popupAddCardElement);
+addCardFormValidator.enableValidation();
 
 // добавить значения элементов данных пользователя в поля ввода блока редактирования данных пользователя
 const openPropfilePopup = () => {
@@ -116,10 +119,10 @@ function openImage(data) {
 }
 
 // обратчики событий
-buttonOpenPopupProfile.addEventListener('click', openPropfilePopup);
+buttonOpenPopupProfile.addEventListener('click', () => {profileFormValidator.disabledButton(); openPropfilePopup()});
 buttonClosePopup.addEventListener('click', () => closePopup(popupEditProfileElement));
 formProfileElement.addEventListener('submit', editProfileFormSubmit);
-popupAddCardOpen.addEventListener('click', () => openPopup(popupAddCardElement));
+popupAddCardOpen.addEventListener('click', () => {addCardFormValidator.disabledButton(); openPopup(popupAddCardElement) });
 popupAddCardClose.addEventListener('click', () => closePopup(popupAddCardElement));
 popupAddCardElement.addEventListener('submit',
     (evt) => {
@@ -127,3 +130,4 @@ popupAddCardElement.addEventListener('submit',
     }
 );
 popupImageCloseButton.addEventListener('click', () => closePopup(popupImageElement));
+

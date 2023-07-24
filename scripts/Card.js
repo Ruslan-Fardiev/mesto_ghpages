@@ -23,9 +23,9 @@ export class Card {
     }
 
     // удаление карточки
-    #deleteCard(evt) {
-        evt.target.closest('.card').remove();
-    }
+    #deleteCard = () => {
+        this.#card.remove();
+    } 
 
     createCard() {
         this.#card = this.#getTemplate();
