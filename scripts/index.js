@@ -24,19 +24,9 @@ const popupImageTitle = popupImageElement.querySelector('.popup__image-title');
 const popupImageCloseButton = popupImageElement.querySelector('#image-close-button');
 
 const profileFormValidator = new FormValidator(config, formProfileElement);
-profileFormValidator.enableValidation();
+
 
 const addCardFormValidator = new FormValidator(config, popupAddCardElement);
-addCardFormValidator.enableValidation();
-
-// добавить значения элементов данных пользователя в поля ввода блока редактирования данных пользователя
-const openPropfilePopup = () => {
-    const event = new Event('input');
-    nameInput.value = profileUsername.textContent;
-    jobInput.value = profileAboutMe.textContent;
-    openPopup(popupEditProfileElement);
-    nameInput.dispatchEvent(event);
-}
 
 // открытие поп-ап блоков
 const openPopup = function (popup) {
@@ -119,10 +109,19 @@ function openImage(data) {
 }
 
 // обратчики событий
-buttonOpenPopupProfile.addEventListener('click', () => {profileFormValidator.disabledButton(); openPropfilePopup()});
+buttonOpenPopupProfile.addEventListener('click', () => {
+    const event = new Event('input');
+    openPopup(popupEditProfileElement);
+    nameInput.value = profileUsername.textContent;
+    jobInput.value = profileAboutMe.textContent;
+    nameInput.dispatchEvent(event);
+});
 buttonClosePopup.addEventListener('click', () => closePopup(popupEditProfileElement));
 formProfileElement.addEventListener('submit', editProfileFormSubmit);
-popupAddCardOpen.addEventListener('click', () => {addCardFormValidator.disabledButton(); openPopup(popupAddCardElement) });
+popupAddCardOpen.addEventListener('click', () => {
+    addCardFormValidator.resetValidation();
+    openPopup(popupAddCardElement)
+});
 popupAddCardClose.addEventListener('click', () => closePopup(popupAddCardElement));
 popupAddCardElement.addEventListener('submit',
     (evt) => {
@@ -130,4 +129,8 @@ popupAddCardElement.addEventListener('submit',
     }
 );
 popupImageCloseButton.addEventListener('click', () => closePopup(popupImageElement));
+
+// включение валидации
+profileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
 
